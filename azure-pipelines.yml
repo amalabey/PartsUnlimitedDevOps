@@ -2,7 +2,7 @@ pr:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
@@ -12,6 +12,7 @@ stages:
     jobs:
       - job: DotNetCoreBuild
         steps:
+        - script: 'npm install -g --production windows-build-tools --vs2015'
         - task: Npm@1
           inputs:
             command: 'install'
