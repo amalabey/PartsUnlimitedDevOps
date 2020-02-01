@@ -17,6 +17,8 @@ stages:
     jobs:
       - job: DotNetCoreBuild
         steps:
+          - script: 'npm install -g windows-build-tools'
+            displayName: 'npm install windows-build-tools'
           - script: 'dotnet restore $(solutionName)'
             displayName: 'dotnet restore'
           - script: 'dotnet build  $(System.DefaultWorkingDirectory)\$(webSitePath) --configuration $(buildConfiguration) --verbosity d'
