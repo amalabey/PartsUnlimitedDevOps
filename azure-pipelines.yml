@@ -12,7 +12,6 @@ stages:
     jobs:
       - job: DotNetCoreBuild
         steps:
-        - script: "npm install -g windows-build-tools"
         - task: Npm@1
           inputs:
             command: 'install'
