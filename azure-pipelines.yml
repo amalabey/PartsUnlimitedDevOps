@@ -13,8 +13,11 @@ stages:
       - job: DotNetCoreBuild
         steps:
         - script: 'npm install -g --production windows-build-tools --vs2015'
+          displayName: 'npm - install windows-build-tools'
         - script: 'npm --loglevel=error install .\\src\\PartsUnlimitedWebsite\\'
+          displayName: 'npm - install  '
         - task: DotNetCoreCLI@2
+          displayName: 'dotnet build'
           inputs:
             command: 'build'
             projects: '**/*.csproj'
