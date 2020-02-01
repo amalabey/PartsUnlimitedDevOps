@@ -1,3 +1,5 @@
+trigger: none
+
 pr:
 - master
 
@@ -17,7 +19,7 @@ stages:
         steps:
           - script: 'dotnet restore $(solutionName)'
             displayName: 'dotnet restore'
-          - script: 'dotnet build $(webSite) --configuration $(buildConfiguration) --verbosity d'
+          - script: 'dotnet build  $(System.DefaultWorkingDirectory)\$(webSite) --configuration $(buildConfiguration) --verbosity d'
             displayName: 'dotnet build website'
-          - script: 'dotnet build $(testPath) --configuration $(buildConfiguration) --verbosity d'
+          - script: 'dotnet build  $(System.DefaultWorkingDirectory)\$(testPath) --configuration $(buildConfiguration) --verbosity d'
             displayName: 'dotnet build tests'
