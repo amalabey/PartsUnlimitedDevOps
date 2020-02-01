@@ -13,10 +13,7 @@ stages:
       - job: DotNetCoreBuild
         steps:
         - script: 'npm install -g --production windows-build-tools --vs2015'
-        - task: Npm@1
-          inputs:
-            command: 'install'
-            workingDir: 'src/PartsUnlimitedWebsite'
+        - script: 'npm --loglevel=error install .\\src\\PartsUnlimitedWebsite\\'
         - task: DotNetCoreCLI@2
           inputs:
             command: 'build'
