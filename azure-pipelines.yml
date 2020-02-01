@@ -6,18 +6,18 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  solutionName: 'PartsUnlimited.sln'
+  webSitePath: 'src\PartsUnlimitedWebSite\PartsUnlimitedWebsite.csproj'
+  testPath: 'test\PartsUnlimited.UnitTests\PartsUnlimited.UnitTests.csproj'
 
 stages:
   - stage: "Build"
     jobs:
       - job: DotNetCoreBuild
         steps:
-        - script: 'npm install -g --production windows-build-tools --vs2015'
-          displayName: 'npm - install windows-build-tools'
-        - script: 'npm --loglevel=error install .\\src\\PartsUnlimitedWebsite\\'
-          displayName: 'npm - install  '
-        - task: DotNetCoreCLI@2
-          displayName: 'dotnet build'
-          inputs:
-            command: 'build'
-            projects: '**/*.csproj'
+          - script: 'dotnet restore $(solutionName)'
+            displayName: 'dotnet restore'
+          - script: 'dotnet build $(webSite) --configuration $(buildConfiguration) --verbosity d'
+            displayName: 'dotnet build website'
+          - script: 'dotnet build $(testPath) --configuration $(buildConfiguration) --verbosity d'
+            displayName: 'dotnet build tests'
