@@ -15,7 +15,7 @@ stages:
         - task: Npm@1
           inputs:
             command: 'install'
-            workingDir: '/src/PartsUnlimitedWebsite'
+            workingDir: 'src/PartsUnlimitedWebsite'
         - task: DotNetCoreCLI@2
           inputs:
             command: 'build'
